@@ -61,15 +61,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conventions\IConvention.cs" />
+    <Compile Include="Filters\Aggregate.cs" />
     <Compile Include="Filters\IFilter.cs" />
     <Compile Include="Filters\InStockProductsFilter.cs" />
     <Compile Include="Model\Customer.cs" />
-    <Compile Include="Model\Entity.cs" />
     <Compile Include="Model\Product.cs" />
+    <Compile Include="Pipeline\FilterExecutor.cs" />
+    <Compile Include="Pipeline\FilterLocator.cs" />
+    <Compile Include="Pipeline\IFilterLocator.cs" />
     <Compile Include="Pipeline\IServiceInvoker.cs" />
+    <Compile Include="Pipeline\ListUtilities.cs" />
     <Compile Include="Pipeline\QueryModelInspector.cs" />
     <Compile Include="Pipeline\ServiceInvoker.cs" />
+    <Compile Include="Conventions\FilterNameStartsWithPropertyName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\Entity.cs" />
     <Compile Include="Repositories\FakeRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
   </ItemGroup>

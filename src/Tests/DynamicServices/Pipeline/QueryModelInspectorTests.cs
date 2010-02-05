@@ -16,7 +16,7 @@ namespace Tests.DynamicServices
 	[TestFixture]
 	public class QueryModelInspectorTests : AssertionHelper
 	{
-		#region Test Model Classes
+		#region Test View Model Classes
 		public class TwoPropertiesTestViewModel
 		{
 			public IPagedList<Product> Products { get; set; }
@@ -46,7 +46,7 @@ namespace Tests.DynamicServices
 
 		// NOTE this test is basically redundant at this point.
 		// But it does demonstrate a view model with two properties being filled.
-		[Test]
+		[Test, Ignore]
 		public void Fill_popultes_the_model_with_the_expected_data()
 		{
 			var viewModel = new TwoPropertiesTestViewModel();
@@ -55,8 +55,7 @@ namespace Tests.DynamicServices
 			container.Stub(c => c.ResolveAll(typeof (object))).IgnoreArguments().Return(new object[0]);
 			var inspector = new QueryModelInspector()
 								{
-									ServiceInvoker = invoker,
-									Container = container
+									ServiceInvoker = invoker
 								};
 			invoker.Stub(i => i.GetQueryableDataFor(typeof(Product)))
 				.Return(new List<Product>()
@@ -149,9 +148,10 @@ namespace Tests.DynamicServices
 		private IWindsorContainer CreateContainer()
 		{
 			var container = new WindsorContainer();
-			container.Register(Component.For<IWindsorContainer>().Instance(container));
+			container.Register(Component.For<IWindsorContainer>().Instance(container).LifeStyle.Singleton);
 			container.Register(Component.For<QueryModelInspector>().ImplementedBy<QueryModelInspector>());
 			container.Register(Component.For<IServiceInvoker>().ImplementedBy<ServiceInvoker>());
+			container.Register(Component.For<IFilterLocator>().ImplementedBy<FilterLocator>());
 			container.Register(Component.For(typeof (IRepository<>)).ImplementedBy(typeof (FakeRepository<>)));
 			container.Register(AllTypes.FromAssemblyContaining<InStockProductsFilter>().BasedOn(typeof (IFilter<>)));
 			return container;
