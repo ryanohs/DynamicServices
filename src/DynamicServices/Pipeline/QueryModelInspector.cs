@@ -60,7 +60,7 @@ namespace DynamicServices.Pipeline
 
 		private object GetQueryableDataFor(Type type)
 		{
-			return DataProvider.GetType().GetMethod("GetAll").MakeGenericMethod(type).Invoke(DataProvider, null);
+			return DataProvider.GetType().GetMethod("GetAllAsQueryable").Invoke(DataProvider, new[] {type});
 		}
 	}
 }

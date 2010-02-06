@@ -10,10 +10,10 @@ namespace Tests
 	{
 		public IWindsorContainer Container { get; set; }
 
-		public IQueryable<T> GetAll<T>()
+		public object GetAllAsQueryable(Type type)
 		{
-			var repository = Container.Resolve<IRepository<T>>();
-			return repository.All;
+			var repository = Container.Resolve(typeof(IRepository<>).MakeGenericType(type));
+			return repository.GetType().GetProperty("All").GetValue(repository, null);
 		}
 	}
 }
