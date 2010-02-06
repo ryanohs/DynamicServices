@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Core;
-using DynamicServices.Model;
+using Tests.Model;
 
-namespace DynamicServices.Repositories
+namespace Tests.Repositories
 {
 	public class FakeRepository<T> : IRepository<T>
 		where T : Entity, new()

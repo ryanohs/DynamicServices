@@ -49,5 +49,13 @@ namespace DynamicServices.Pipeline
 			}
 			throw new ArgumentException("Argument is not enumerable.");
 		}
+
+		public static void AssertPropertyExists(Type type, string propertyName)
+		{
+			if(type.GetProperty(propertyName) == null)
+			{
+				throw new ArgumentException(string.Format("Type {0} does not have a property named '{1}'", type.FullName, propertyName));
+			}
+		}
 	}
 }

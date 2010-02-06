@@ -2,14 +2,16 @@ using System;
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using DynamicServices.Configuration;
 using DynamicServices.Filters;
-using DynamicServices.Model;
 using DynamicServices.Pipeline;
-using DynamicServices.Repositories;
 using NUnit.Framework;
 using System.Collections.Generic;
 using PagedList;
 using Rhino.Mocks;
+using Tests.Model;
+using Tests.Repositories;
+using InStockProductsFilter=Tests.Filters.InStockProductsFilter;
 
 namespace Tests.DynamicServices
 {
@@ -46,36 +48,36 @@ namespace Tests.DynamicServices
 
 		// NOTE this test is basically redundant at this point.
 		// But it does demonstrate a view model with two properties being filled.
-		[Test, Ignore]
-		public void Fill_popultes_the_model_with_the_expected_data()
-		{
-			var viewModel = new TwoPropertiesTestViewModel();
-			var invoker = MockRepository.GenerateStub<IServiceInvoker>();
-			var container = MockRepository.GenerateStub<IWindsorContainer>();
-			container.Stub(c => c.ResolveAll(typeof (object))).IgnoreArguments().Return(new object[0]);
-			var inspector = new QueryModelInspector()
-								{
-									ServiceInvoker = invoker
-								};
-			invoker.Stub(i => i.GetQueryableDataFor(typeof(Product)))
-				.Return(new List<Product>()
-		                    {
-		                        new Product()
-		                    }.ToPagedList(0, 20));
-			invoker.Stub(i => i.GetQueryableDataFor(typeof(Customer)))
-				.Return(new List<Customer>()
-		                    {
-		                        new Customer(),
-		                        new Customer()
-		                    });
+		//[Test, Ignore]
+		//public void Fill_popultes_the_model_with_the_expected_data()
+		//{
+		//    var viewModel = new TwoPropertiesTestViewModel();
+		//    var invoker = MockRepository.GenerateStub<IServiceInvoker>();
+		//    var container = MockRepository.GenerateStub<IWindsorContainer>();
+		//    container.Stub(c => c.ResolveAll(typeof (object))).IgnoreArguments().Return(new object[0]);
+		//    var inspector = new QueryModelInspector()
+		//                        {
+		//                            ServiceInvoker = invoker
+		//                        };
+		//    invoker.Stub(i => i.GetQueryableDataFor(typeof(Product)))
+		//        .Return(new List<Product>()
+		//                    {
+		//                        new Product()
+		//                    }.ToPagedList(0, 20));
+		//    invoker.Stub(i => i.GetQueryableDataFor(typeof(Customer)))
+		//        .Return(new List<Customer>()
+		//                    {
+		//                        new Customer(),
+		//                        new Customer()
+		//                    });
 
-			inspector.Fill(viewModel, null);
+		//    inspector.Fill(viewModel, null);
 
-			Expect(viewModel.Products, Is.Not.Null);
-			Expect(viewModel.Products.Count(), Is.EqualTo(1));
-			Expect(viewModel.Customers, Is.Not.Null);
-			Expect(viewModel.Customers.Count(), Is.EqualTo(2));
-		}
+		//    Expect(viewModel.Products, Is.Not.Null);
+		//    Expect(viewModel.Products.Count(), Is.EqualTo(1));
+		//    Expect(viewModel.Customers, Is.Not.Null);
+		//    Expect(viewModel.Customers.Count(), Is.EqualTo(2));
+		//}
 
 		[Test]
 		public void Fill_NonNullProperyIsNotSet()
@@ -150,7 +152,7 @@ namespace Tests.DynamicServices
 			var container = new WindsorContainer();
 			container.Register(Component.For<IWindsorContainer>().Instance(container).LifeStyle.Singleton);
 			container.Register(Component.For<QueryModelInspector>().ImplementedBy<QueryModelInspector>());
-			container.Register(Component.For<IServiceInvoker>().ImplementedBy<ServiceInvoker>());
+			container.Register(Component.For<IDataProvider>().ImplementedBy<TestDataProvider>());
 			container.Register(Component.For<IFilterLocator>().ImplementedBy<FilterLocator>());
 			container.Register(Component.For(typeof (IRepository<>)).ImplementedBy(typeof (FakeRepository<>)));
 			container.Register(AllTypes.FromAssemblyContaining<InStockProductsFilter>().BasedOn(typeof (IFilter<>)));

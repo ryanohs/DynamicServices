@@ -77,11 +77,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Filters\InStockProductsFilter.cs" />
+    <Compile Include="Model\Aggregate.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\Entity.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="TestDataProvider.cs" />
     <Compile Include="DynamicServices\Conventions\FilterNameStartsWithPropertyName.cs" />
     <Compile Include="DynamicServices\Pipeline\FilterExecutorTests.cs" />
     <Compile Include="DynamicServices\Pipeline\QueryModelInspectorTests.cs" />
     <Compile Include="DynamicServices\Pipeline\UtilitiesTests.cs" />
+    <Compile Include="DynamicServices\QueryBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\FakeRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Web\Core\Mapping\AutoMapperObjectMapperTests.cs" />
   </ItemGroup>
   <ItemGroup>

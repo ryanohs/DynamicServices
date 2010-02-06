@@ -1,8 +1,9 @@
 using System;
 using System.Linq;
-using DynamicServices.Model;
+using DynamicServices.Filters;
+using Tests.Model;
 
-namespace DynamicServices.Filters
+namespace Tests.Filters
 {
 	public class InStockProductsFilter : IFilter<Product>
 	{
@@ -11,6 +12,4 @@ namespace DynamicServices.Filters
 			return source.Where(p => p.InStock);
 		}
 	}
-
-	
 }

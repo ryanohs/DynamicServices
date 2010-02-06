@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
-using DynamicServices.Model;
 using DynamicServices.Pipeline;
 using NUnit.Framework;
 using System.Collections.Generic;
 using PagedList;
+using Tests.Model;
 
 namespace Tests.DynamicServices
 {

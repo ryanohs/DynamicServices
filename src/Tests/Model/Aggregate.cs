@@ -1,7 +1,6 @@
 using System.Linq;
-using DynamicServices.Model;
 
-namespace DynamicServices.Filters
+namespace Tests.Model
 {
 	public class Products : IAggregate<Product>
 	{

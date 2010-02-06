@@ -1,14 +1,16 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using DynamicServices.Configuration;
 using PagedList;
 
 namespace DynamicServices.Pipeline
 {
 	public class QueryModelInspector
 	{
-		public IServiceInvoker ServiceInvoker { get; set; }
 		public IFilterLocator FilterLocator { get; set; }
+		public IDataProvider DataProvider { get; set; }
 	
 		public void Fill(object viewModel, object inputModel)
 		{
@@ -32,9 +34,9 @@ namespace DynamicServices.Pipeline
 			var baseType = propertyType.GetGenericTypeDefinition();
 			var innerType = propertyType.GetGenericArguments()[0];
 
-			var data = ServiceInvoker.GetQueryableDataFor(innerType);
+			var data = GetQueryableDataFor(innerType);
 
-			var filters = FilterLocator.GetFiltersByConvention(innerType, property.Name);
+			var filters = FilterLocator.GetFiltersByConvention(innerType, property);
 			foreach(var filter in filters)
 			{
 				data = new FilterExecutor().Execute(filter, data);
@@ -54,6 +56,11 @@ namespace DynamicServices.Pipeline
 			}
 			
 			property.SetValue(viewModel, result, null);
+		}
+
+		private object GetQueryableDataFor(Type type)
+		{
+			return DataProvider.GetType().GetMethod("GetAll").MakeGenericMethod(type).Invoke(DataProvider, null);
 		}
 	}
 }

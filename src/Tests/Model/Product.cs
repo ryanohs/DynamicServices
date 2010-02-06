@@ -1,4 +1,4 @@
-namespace DynamicServices.Model
+namespace Tests.Model
 {
 	public class Product : Entity
 	{
