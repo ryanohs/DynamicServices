@@ -16,6 +16,11 @@ namespace DynamicServices.Mvc
 
 		public virtual ActionDescriptor FindAction(ControllerContext controllerContext, ControllerDescriptor controllerDescriptor, string actionName)
 		{
+			//if (controllerContext.HttpContext.Request.HttpMethod != Verbs.Post)
+			//{
+			//    return null;
+			//}
+
 			var controllerName = controllerContext.RouteData.Values["controller"].ToString().ToLowerInvariant();
 			if (!DynamicControllerRegistrar.Commands.ContainsKey(controllerName))
 			{

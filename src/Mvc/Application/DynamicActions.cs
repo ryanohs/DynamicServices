@@ -11,7 +11,7 @@ namespace Mvc.Application
 			DynamicControllerRegistrar.AddCommonActionFor<Query>("alls");
 			DynamicControllerRegistrar.AddCommonActionFor<ViewWithoutModel>("index");
 
-			DynamicControllerRegistrar.AddCommandHandler<Product>("products");
+			DynamicControllerRegistrar.AddCommandHandler<Products>("products");
 		}
 	}
 }

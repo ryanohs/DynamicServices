@@ -21,7 +21,7 @@ namespace Mvc.Application
 		private static void RegisterRepositories(IWindsorContainer container)
 		{
 			container.Register(
-				Component.For<IDynamicRepository<Product>>().ImplementedBy<ProductRepository>().LifeStyle.Singleton);
+				Component.For<IDynamicRepository<Product>>().ImplementedBy<ProductsRepository>().LifeStyle.Singleton);
 		}
 
 		private static void RegisterControllerFactory(IWindsorContainer container)

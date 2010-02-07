@@ -1,3 +1,5 @@
+using CommonServiceLocator.WindsorAdapter;
+
 namespace Mvc.Application
 {
 	using Castle.MicroKernel.Registration;
@@ -26,7 +28,8 @@ namespace Mvc.Application
 						.Instance(Container)
 						.LifeStyle.Singleton
 					);
-				Container.Register(Component.For<IServiceLocator>().ImplementedBy<WindsorCsl>().LifeStyle.Singleton);
+				ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(Container));
+				Container.Register(Component.For<IServiceLocator>().Instance(ServiceLocator.Current).LifeStyle.Singleton);
 			}
 			return true;
 		}

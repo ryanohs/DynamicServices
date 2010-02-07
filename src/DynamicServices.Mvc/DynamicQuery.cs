@@ -1,3 +1,6 @@
+using System.Linq;
+using Microsoft.Practices.ServiceLocation;
+
 namespace DynamicServices.Mvc
 {
 	using System;
@@ -5,9 +8,19 @@ namespace DynamicServices.Mvc
 
 	public class DynamicQuery : IDynamicQuery
 	{
+		public IServiceLocator Locator { get; set; }
+
 		public object GetData(ControllerContext context, QueryParameters parameters)
 		{
-			throw new NotImplementedException();
+			var repositoryName = context.GetControllerName() + "repository";
+			var repository =
+				Locator.GetAllInstances(typeof(IDynamicRepository)).FirstOrDefault(
+					o => o.GetType().Name.ToLowerInvariant() == repositoryName);
+			if (repository == null)
+			{
+				throw new Exception(string.Format("Could not locate a repository named '{0}'", repositoryName));
+			}
+			return repository.GetType().GetMethod("All").Invoke(repository, null);
 		}
 	}
 }

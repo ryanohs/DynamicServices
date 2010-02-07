@@ -1,8 +1,15 @@
+using System.Linq;
+
 namespace DynamicServices
 {
-	public interface IDynamicRepository<T>
+	public interface IDynamicRepository
 	{
-		T Get(object id);
+	}
+
+	public interface IDynamicRepository<T> : IDynamicRepository
+	{
+		T Get(int id);
+		IQueryable<T> All();
 		void Add(T entity);
 		void Remove(T entity);
 	}

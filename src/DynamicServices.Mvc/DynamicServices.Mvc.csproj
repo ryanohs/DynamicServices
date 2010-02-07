@@ -68,6 +68,7 @@
     <Compile Include="ActionDescriptors\QueryResult.cs" />
     <Compile Include="CommandActions.cs" />
     <Compile Include="CommonActions.cs" />
+    <Compile Include="ControllerContextExtensions.cs" />
     <Compile Include="DynamicController.cs" />
     <Compile Include="DynamicActionDescriptor.cs" />
     <Compile Include="DynamicActionInvoker.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="QueryParameters.cs" />
     <Compile Include="ReflectedCommand.cs" />
     <Compile Include="ReflectedQuery.cs" />
+    <Compile Include="Verbs.cs" />
     <Compile Include="ViewWithoutModel.cs" />
   </ItemGroup>
   <ItemGroup>
