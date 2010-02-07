@@ -67,6 +67,7 @@
     <Compile Include="Conventions\IConvention.cs" />
     <Compile Include="Filters\IFilter.cs" />
     <Compile Include="Filters\QueryBuilder.cs" />
+    <Compile Include="IDynamicRepository.cs" />
     <Compile Include="Pipeline\FilterExecutor.cs" />
     <Compile Include="Pipeline\FilterLocator.cs" />
     <Compile Include="Pipeline\IFilterLocator.cs" />
