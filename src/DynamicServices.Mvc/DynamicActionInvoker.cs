@@ -1,37 +1,37 @@
-using System.Web.Mvc;
-using DynamicServices.Pipeline;
-
 namespace DynamicServices.Mvc
 {
+	using System.Linq;
+	using System.Web.Mvc;
+	using Microsoft.Practices.ServiceLocation;
+
 	public class DynamicActionInvoker : ControllerActionInvoker
 	{
-		private readonly QueryModelInspector _ModelInspector;
+		private readonly IServiceLocator _Locator;
 
-		public DynamicActionInvoker(QueryModelInspector modelInspector)
+		public DynamicActionInvoker(IServiceLocator locator)
 		{
-			_ModelInspector = modelInspector;
+			_Locator = locator;
 		}
 
-		protected override ActionDescriptor FindAction(ControllerContext controllerContext, ControllerDescriptor controllerDescriptor, string actionName)
+		protected override ActionDescriptor FindAction(ControllerContext controllerContext,
+		                                               ControllerDescriptor controllerDescriptor, string actionName)
 		{
 			var action = base.FindAction(controllerContext, controllerDescriptor, actionName);
-			
-			if(action == null)
+			if (action != null)
 			{
-				// TODO If ActionName + ControllerName - "Controller" = any filter/query names
-				// Use that query
-				// How exactly is this going to work? Func<>?
-				action = new DynamicActionDescriptor(actionName, controllerDescriptor, _ModelInspector);
-
-				// TODO If ActionName - ControllerName + "Controller" = name of a boolean property on the target type
-				// Use the dynamic boolean filter
-
-				// TODO Look for CUD commands
-
-				// TODO Look for any other matching commands
+				return action;
+			}
+			
+			var actionFinders = _Locator.GetAllInstances<IFindAction>();
+			if (actionFinders == null)
+			{
+				return null;
 			}
 
-			return action;
+			return actionFinders
+				.Select(f => f.FindAction(controllerContext, controllerDescriptor, actionName))
+				.Where(d => d != null)
+				.FirstOrDefault();
 		}
 	}
 }

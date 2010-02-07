@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectedAutoMap.JoinedFilt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicServices.Mvc", "DynamicServices.Mvc\DynamicServices.Mvc.csproj", "{4F2B364A-1DE9-4B85-9570-C09141445BF0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{F87911FA-D2D9-4F71-AD38-1F0C25A2AF80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc", "Mvc\Mvc.csproj", "{6C0B314B-5508-43BB-9BE6-98C2B2914768}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,8 +53,15 @@ Global
 		{4F2B364A-1DE9-4B85-9570-C09141445BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F2B364A-1DE9-4B85-9570-C09141445BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F2B364A-1DE9-4B85-9570-C09141445BF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C0B314B-5508-43BB-9BE6-98C2B2914768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C0B314B-5508-43BB-9BE6-98C2B2914768}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C0B314B-5508-43BB-9BE6-98C2B2914768}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C0B314B-5508-43BB-9BE6-98C2B2914768}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6C0B314B-5508-43BB-9BE6-98C2B2914768} = {F87911FA-D2D9-4F71-AD38-1F0C25A2AF80}
 	EndGlobalSection
 EndGlobal
