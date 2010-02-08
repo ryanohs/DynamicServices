@@ -18,7 +18,7 @@
 
 			WebRegistry.Register(WindsorContainerSetup.Container);
 			DynamicRegistry.Register(WindsorContainerSetup.Container);
-			DynamicActions.RegisterConventions();
+			DynamicServicesRegistry.RegisterConventions();
 		}
 	}
 }

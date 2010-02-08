@@ -1,38 +1,42 @@
 namespace DynamicServices.Mvc
 {
-	using System.Linq;
 	using System.Web.Mvc;
 	using Microsoft.Practices.ServiceLocation;
 
 	public class QueryActions : IFindAction
 	{
 		private readonly IServiceLocator _Locator;
+		private readonly ServicesRegistry _Registry;
 
-		public QueryActions(IServiceLocator locator)
+		public QueryActions(IServiceLocator locator, ServicesRegistry registry)
 		{
 			_Locator = locator;
+			_Registry = registry;
 		}
 
-		public virtual ActionDescriptor FindAction(ControllerContext controllerContext, ControllerDescriptor controllerDescriptor, string actionName)
+		public virtual ActionDescriptor FindAction(ControllerContext controllerContext,
+		                                           ControllerDescriptor controllerDescriptor, string actionName)
 		{
-			var controllerName = controllerDescriptor.ControllerName.ToLowerInvariant();
-			if (!DynamicControllerRegistrar.Queries.ContainsKey(controllerName))
+			// Todo we may want convention here.
+			//if (controllerContext.HttpContext.Request.HttpMethod != Verbs.Get)
+			//{
+			//    return null;
+			//}
+			var controllerName = controllerContext.RouteData.Values["controller"].ToString().ToLowerInvariant();
+			var service = _Registry.GetService(controllerName);
+			if (service == null)
 			{
 				return null;
 			}
-			var queryType = DynamicControllerRegistrar.Queries[controllerName];
-			var queryName = actionName.ToLowerInvariant();
-			var queryMethod = queryType.GetMethods()
-				.Where(m => m.Name.ToLowerInvariant() == queryName)
-				.FirstOrDefault();
-			if (queryMethod == null)
+			var queryAction = service.FindAction(actionName);
+			if (queryAction == null || !queryAction.IsQuery())
 			{
 				return null;
 			}
 			var queryDescriptor = _Locator.GetInstance<ReflectedQuery>();
 			queryDescriptor.SetActionName(actionName);
 			queryDescriptor.SetControllerDescriptor(controllerDescriptor);
-			queryDescriptor.SetQueryMethod(queryMethod);
+			queryDescriptor.SetQueryMethod(queryAction);
 			return queryDescriptor;
 		}
 	}

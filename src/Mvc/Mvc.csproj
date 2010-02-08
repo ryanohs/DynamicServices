@@ -85,7 +85,7 @@
   <ItemGroup>
     <Compile Include="Application\WindsorContainerSetup.cs" />
     <Compile Include="Application\WebRegistry.cs" />
-    <Compile Include="Application\DynamicActions.cs" />
+    <Compile Include="Application\DynamicServicesRegistry.cs" />
     <Compile Include="Application\RouteRegistry.cs" />
     <Compile Include="Application\ViewEngineRegistry.cs" />
     <Compile Include="Default.aspx.cs">

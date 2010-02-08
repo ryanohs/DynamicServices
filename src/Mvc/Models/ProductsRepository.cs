@@ -13,11 +13,11 @@ namespace Mvc.Models
 		public ProductsRepository()
 		{
 			_objects = new List<Product>(Enumerable.Range(0, 10).Select(i => new Product() {Id = i}));
-		}
-	
-		public Product Get(int id)
+		}	
+
+		public Product Get(object id)
 		{
-			return _objects.SingleOrDefault(p => p.Id == id);
+			return _objects.SingleOrDefault(p => p.Id == Convert.ToInt32(id));
 		}
 
 		public IQueryable<Product> All()

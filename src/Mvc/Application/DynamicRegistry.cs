@@ -2,6 +2,7 @@ namespace Mvc.Application
 {
 	using Castle.MicroKernel.Registration;
 	using Castle.Windsor;
+	using DynamicServices;
 	using DynamicServices.Mvc;
 
 	public static class DynamicRegistry
@@ -16,6 +17,9 @@ namespace Mvc.Application
 				);
 			container.Register(
 				Component.For<IDynamicQuery>().ImplementedBy<DynamicQuery>()
+				);
+			container.Register(
+				Component.For<ServicesRegistry>().ImplementedBy<DynamicServicesRegistry>().LifeStyle.Singleton
 				);
 		}
 	}

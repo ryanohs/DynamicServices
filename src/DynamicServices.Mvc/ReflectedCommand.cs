@@ -2,15 +2,13 @@ namespace DynamicServices.Mvc
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Linq;
-	using System.Reflection;
 	using System.Web.Mvc;
 	using Microsoft.Practices.ServiceLocation;
 
 	public class ReflectedCommand : DynamicActionDescriptor
 	{
 		private readonly IServiceLocator _Locator;
-		private MethodInfo _CommandMethod;
+		private DynamicAction _CommandAction;
 
 		public ReflectedCommand(IServiceLocator locator)
 		{
@@ -19,25 +17,21 @@ namespace DynamicServices.Mvc
 
 		public override object Execute(ControllerContext controllerContext, IDictionary<string, object> parameters)
 		{
-			var commandType = _CommandMethod.DeclaringType;
-			var repositoryType = typeof (IDynamicRepository<>).MakeGenericType(new[] {commandType});
-			var repository = _Locator.GetInstance(repositoryType);
-			var getCommand = repositoryType.GetMethod("Get");
-			var command = getCommand.Invoke(repository, new[] {parameters["id"]});
-			if(command == null)
+			var serviceType = _CommandAction.DeclaringType;
+			var service = _Locator.GetInstance(serviceType);
+			if (service == null)
 			{
-				throw new Exception("Entity not found");
+				throw new Exception("Type not found.");
 			}
-			_CommandMethod.Invoke(command, parameters.Where(p => p.Key != "id").OfType<object>().ToArray());
+			_CommandAction.Invoke(service, parameters);
 			return new EmptyResult();
 		}
 
-		public void SetCommandMethod(MethodInfo commandMethod)
+		public void SetCommandMethod(DynamicAction commandAction)
 		{
-			_CommandMethod = commandMethod;
+			_CommandAction = commandAction;
 			_Parameters.Clear();
-			AddParameter("id", typeof (object));
-			AddParameters(commandMethod.GetParameters());
+			AddParameters(commandAction);
 		}
 	}
 }

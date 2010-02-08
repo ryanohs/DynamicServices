@@ -4,8 +4,8 @@ namespace Mvc.Application
 	using System.Web.Mvc;
 	using Castle.MicroKernel.Registration;
 	using Castle.Windsor;
-	using DynamicServices;
-	using DynamicServices.Mvc;
+	using global::DynamicServices;
+	using global::DynamicServices.Mvc;
 	using Models;
 
 	public class WebRegistry

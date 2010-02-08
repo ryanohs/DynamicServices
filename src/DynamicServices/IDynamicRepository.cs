@@ -8,7 +8,7 @@ namespace DynamicServices
 
 	public interface IDynamicRepository<T> : IDynamicRepository
 	{
-		T Get(int id);
+		T Get(object id);
 		IQueryable<T> All();
 		void Add(T entity);
 		void Remove(T entity);

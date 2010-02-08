@@ -65,6 +65,12 @@
     <Compile Include="Configuration\IConfiguration.cs" />
     <Compile Include="Configuration\IDataProvider.cs" />
     <Compile Include="Conventions\IConvention.cs" />
+    <Compile Include="DynamicAction.cs" />
+    <Compile Include="DynamicService.cs" />
+    <Compile Include="DynamicType.cs" />
+    <Compile Include="EntityAction.cs" />
+    <Compile Include="EntityType.cs" />
+    <Compile Include="ServicesRegistry.cs" />
     <Compile Include="Filters\IFilter.cs" />
     <Compile Include="Filters\QueryBuilder.cs" />
     <Compile Include="IDynamicRepository.cs" />
