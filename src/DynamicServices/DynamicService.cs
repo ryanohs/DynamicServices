@@ -38,5 +38,11 @@ namespace DynamicServices
 				.FirstOrDefault();
 		}
 
+		public IList<DynamicAction> GetActions()
+		{
+			return Types
+				.SelectMany(t => t.GetActions())
+				.ToList();
+		}
 	}
 }
