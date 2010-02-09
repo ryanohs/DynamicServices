@@ -8,11 +8,13 @@ namespace DynamicServices.Mvc
 	public class ReflectedCommand : DynamicActionDescriptor
 	{
 		private readonly IServiceLocator _Locator;
+		private readonly IDynamicActionInvoker _Invoker;
 		private DynamicAction _CommandAction;
 
-		public ReflectedCommand(IServiceLocator locator)
+		public ReflectedCommand(IServiceLocator locator, IDynamicActionInvoker invoker)
 		{
 			_Locator = locator;
+			_Invoker = invoker;
 		}
 
 		public override object Execute(ControllerContext controllerContext, IDictionary<string, object> parameters)
@@ -23,7 +25,7 @@ namespace DynamicServices.Mvc
 			{
 				throw new Exception("Type not found.");
 			}
-			_CommandAction.Invoke(service, parameters);
+			_CommandAction.Invoke(_Invoker, service, parameters);
 			return new EmptyResult();
 		}
 

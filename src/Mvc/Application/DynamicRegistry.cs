@@ -4,6 +4,7 @@ namespace Mvc.Application
 	using Castle.Windsor;
 	using DynamicServices;
 	using DynamicServices.Mvc;
+	using DynamicServices.Sakurity;
 
 	public static class DynamicRegistry
 	{
@@ -20,6 +21,12 @@ namespace Mvc.Application
 				);
 			container.Register(
 				Component.For<ServicesRegistry>().ImplementedBy<DynamicServicesRegistry>().LifeStyle.Singleton
+				);
+			container.Register(
+				Component.For<ISakurityOffica>().ImplementedBy<SakurityOffica>().LifeStyle.Singleton
+				);
+			container.Register(
+				Component.For<IDynamicActionInvoker>().ImplementedBy<SakurityDynamicActionInvoker>().LifeStyle.Transient
 				);
 		}
 	}

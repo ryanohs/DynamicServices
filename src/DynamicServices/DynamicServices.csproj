@@ -70,6 +70,16 @@
     <Compile Include="DynamicType.cs" />
     <Compile Include="EntityAction.cs" />
     <Compile Include="EntityType.cs" />
+    <Compile Include="IDynamicActionInvoker.cs" />
+    <Compile Include="Sakurity\ISakurityOffica.cs" />
+    <Compile Include="Sakurity\ThisDudeNeedTaGo.cs" />
+    <Compile Include="Sakurity\SakurityOffica.cs" />
+    <Compile Include="Sakurity\ISecurityCheck.cs" />
+    <Compile Include="Sakurity\MethodAccessExpression.cs" />
+    <Compile Include="Sakurity\SakurityRegistry.cs" />
+    <Compile Include="Sakurity\SakurityResult.cs" />
+    <Compile Include="Sakurity\TypeAccessExpression.cs" />
+    <Compile Include="Sakurity\SakurityDynamicActionInvoker.cs" />
     <Compile Include="ServicesRegistry.cs" />
     <Compile Include="Filters\IFilter.cs" />
     <Compile Include="Filters\QueryBuilder.cs" />

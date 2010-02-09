@@ -16,12 +16,19 @@ namespace DynamicServices
 			get { return typeof (IDynamicRepository<>).MakeGenericType(new[] {_Method.DeclaringType}); }
 		}
 
-		public override object Invoke(object instance, IDictionary<string, object> parameters)
+		public override object Invoke(IDynamicActionInvoker invoker, object instance, IDictionary<string, object> parameters)
+		{
+			var entity = GetEntity(instance, invoker, parameters);
+			return base.Invoke(invoker, entity,
+			                   parameters.Where(p => p.Key.ToLowerInvariant() != "id").ToDictionary(x => x.Key, x => x.Value));
+		}
+
+		private object GetEntity(object instance, IDynamicActionInvoker invoker, IDictionary<string, object> parameters)
 		{
 			var getCommand = instance.GetType().GetMethod("Get");
-			var entity = getCommand.Invoke(instance, new[] {parameters["id"]});
-			return base.Invoke(entity,
-			                   parameters.Where(p => p.Key.ToLowerInvariant() != "id").ToDictionary(x => x.Key, x => x.Value));
+			return invoker.Invoke(getCommand, instance,
+			                      parameters.Where(p => p.Key.ToLowerInvariant() == "id").ToDictionary(x => x.Key,
+			                                                                                           x => x.Value));
 		}
 
 		public override IList<DynamicParameter> GetParameters()

@@ -9,11 +9,13 @@ namespace DynamicServices.Mvc
 	public class ReflectedQuery : DynamicActionDescriptor
 	{
 		private readonly IServiceLocator _Locator;
+		private readonly IDynamicActionInvoker _Invoker;
 		private DynamicAction _QueryAction;
 
-		public ReflectedQuery(IServiceLocator locator)
+		public ReflectedQuery(IServiceLocator locator, IDynamicActionInvoker invoker)
 		{
 			_Locator = locator;
+			_Invoker = invoker;
 		}
 
 		public override object Execute(ControllerContext controllerContext, IDictionary<string, object> parameters)
@@ -24,7 +26,7 @@ namespace DynamicServices.Mvc
 			{
 				throw new Exception("Type not found.");
 			}
-			var data = _QueryAction.Invoke(service, parameters);
+			var data = _QueryAction.Invoke(_Invoker, service, parameters);
 			return new QueryResult(data);
 		}
 

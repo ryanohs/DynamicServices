@@ -83,6 +83,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Sakurity.cs" />
     <Compile Include="Application\WindsorContainerSetup.cs" />
     <Compile Include="Application\WebRegistry.cs" />
     <Compile Include="Application\DynamicServicesRegistry.cs" />

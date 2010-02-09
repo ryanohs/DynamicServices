@@ -29,9 +29,9 @@ namespace DynamicServices
 			return !IsCommand();
 		}
 
-		public virtual object Invoke(object instance, IDictionary<string, object> parameters)
+		public virtual object Invoke(IDynamicActionInvoker invoker, object instance, IDictionary<string, object> parameters)
 		{
-			return _Method.Invoke(instance, parameters.Select(p => p.Value).OfType<object>().ToArray());
+			return invoker.Invoke(_Method, instance, parameters);
 		}
 
 		public virtual IList<DynamicParameter> GetParameters()
