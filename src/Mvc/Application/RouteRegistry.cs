@@ -12,7 +12,7 @@ namespace Mvc.Application
 			routes.MapRoute(
 				"Default", // Route name
 				"{controller}/{action}/{id}", // URL with parameters
-				new {controller = "Products", action = "ThrowException", id = ""} // Parameter defaults
+				new {controller = "Products", action = "All", id = ""} // Parameter defaults
 				);
 		}
 	}

@@ -20,7 +20,7 @@ namespace DynamicServices.Mvc
 
 		public override object Execute(ControllerContext controllerContext, IDictionary<string, object> parameters)
 		{
-			var serviceType = _QueryAction.DeclaringType;
+			var serviceType = _QueryAction.Type;
 			var service = _Locator.GetInstance(serviceType);
 			if (service == null)
 			{

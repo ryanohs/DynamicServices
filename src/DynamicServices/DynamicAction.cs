@@ -7,16 +7,19 @@ namespace DynamicServices
 
 	public class DynamicAction
 	{
-		public DynamicAction(MethodInfo methodInfo)
+		protected readonly DynamicType _Type;
+
+		public DynamicAction(DynamicType type, MethodInfo methodInfo)
 		{
+			_Type = type;
 			_Method = methodInfo;
 		}
 
 		protected MethodInfo _Method { get; set; }
 
-		public virtual Type DeclaringType
+		public virtual Type Type
 		{
-			get { return _Method.DeclaringType; }
+			get { return _Type.Type; }
 		}
 
 		public virtual bool IsCommand()

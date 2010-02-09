@@ -11,7 +11,7 @@ namespace DynamicServices
 
 		public override DynamicAction CreateAction(MethodInfo method)
 		{
-			return new EntityAction(method);
+			return new EntityAction(this, method);
 		}
 	}
 }

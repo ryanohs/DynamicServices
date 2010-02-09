@@ -12,7 +12,8 @@ namespace Mvc.Application
 	{
 		public DynamicServicesRegistry()
 		{
-			Service("products").For<IDynamicRepository<Product>>().Entity<Product>();
+			Service("products").For<IDynamicRepository<Product>>();
+			Service("product").Entity<Product>();
 		}
 
 		public static void RegisterConventions()

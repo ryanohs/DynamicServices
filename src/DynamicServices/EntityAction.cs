@@ -7,13 +7,13 @@ namespace DynamicServices
 
 	public class EntityAction : DynamicAction
 	{
-		public EntityAction(MethodInfo method) : base(method)
+		public EntityAction(DynamicType type, MethodInfo method) : base(type, method)
 		{
 		}
 
-		public override Type DeclaringType
+		public override Type Type
 		{
-			get { return typeof (IDynamicRepository<>).MakeGenericType(new[] {_Method.DeclaringType}); }
+			get { return typeof (IDynamicRepository<>).MakeGenericType(new[] {_Type.Type}); }
 		}
 
 		public override object Invoke(IDynamicActionInvoker invoker, object instance, IDictionary<string, object> parameters)
@@ -25,7 +25,7 @@ namespace DynamicServices
 
 		private object GetEntity(object instance, IDynamicActionInvoker invoker, IDictionary<string, object> parameters)
 		{
-			var getCommand = instance.GetType().GetMethod("Get");
+			var getCommand = Type.GetMethod("Get");
 			return invoker.Invoke(getCommand, instance,
 			                      parameters.Where(p => p.Key.ToLowerInvariant() == "id").ToDictionary(x => x.Key,
 			                                                                                           x => x.Value));

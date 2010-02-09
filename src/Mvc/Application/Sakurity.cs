@@ -14,6 +14,13 @@ namespace Mvc.Application
 				.Allow("All")
 				.Everyone();
 
+			For<IDynamicRepository<Product>>()
+				.Allow("Get")
+				.Everyone();
+
+			For<Product>()
+				.Allow("ToString")
+				.Everyone();
 		}
 	}
 }

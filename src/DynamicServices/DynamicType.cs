@@ -47,7 +47,7 @@ namespace DynamicServices
 
 		public virtual DynamicAction CreateAction(MethodInfo method)
 		{
-			return new DynamicAction(method);
+			return new DynamicAction(this, method);
 		}
 
 		public IList<DynamicAction> GetActions()
