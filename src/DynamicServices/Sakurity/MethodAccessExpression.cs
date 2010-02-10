@@ -4,15 +4,10 @@ namespace DynamicServices.Sakurity
 	using System.Linq;
 	using System.Reflection;
 
-	public class MethodAccessExpression : ISecurityCheck
+	public class MethodAccessExpression : SecurityCheckBase
 	{
 		private readonly MethodInfo _Method;
 		private readonly TypeAccessExpression _TypeAccess;
-		private bool _Allow;
-		private bool _Everyone;
-		private string _Group;
-		private int _Level = 1;
-		private Guid _UserId = Guid.Empty;
 
 		public MethodAccessExpression(string method, TypeAccessExpression typeAccess)
 		{
@@ -69,27 +64,15 @@ namespace DynamicServices.Sakurity
 			return this;
 		}
 
-		public MethodAccessExpression Level(int level)
+		public override SakurityResult Check(DynamicAction action)
 		{
-			_Level = level;
-			return this;
-		}
-
-		public int GetLevel()
-		{
-			// ToDo use default level somehow?
-			return _Level;
-		}
-
-		public SakurityResult Check(MethodInfo methodInfo)
-		{
-			if (methodInfo != _Method)
+			if (action.Method != _Method)
 			{
 				return SakurityResult.NotApplicable;
 			}
 			if (_Everyone)
 			{
-				return SakurityResult.Allow;
+				return _Allow ? SakurityResult.Allow : SakurityResult.Deny;
 			}
 			//todo implement other checks
 			return SakurityResult.Deny;

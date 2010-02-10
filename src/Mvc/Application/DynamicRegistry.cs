@@ -28,6 +28,9 @@ namespace Mvc.Application
 			container.Register(
 				Component.For<IDynamicActionInvoker>().ImplementedBy<SakurityDynamicActionInvoker>().LifeStyle.Transient
 				);
+			container.Register(
+				Component.For<DomainActionInvoker>().LifeStyle.Transient
+				);
 		}
 	}
 }

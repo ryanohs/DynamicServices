@@ -12,10 +12,10 @@ namespace DynamicServices
 		public DynamicAction(DynamicType type, MethodInfo methodInfo)
 		{
 			_Type = type;
-			_Method = methodInfo;
+			Method = methodInfo;
 		}
 
-		protected MethodInfo _Method { get; set; }
+		public MethodInfo Method { get; set; }
 
 		public virtual Type Type
 		{
@@ -24,7 +24,7 @@ namespace DynamicServices
 
 		public virtual bool IsCommand()
 		{
-			return _Method.ReturnType == typeof (void);
+			return Method.ReturnType == typeof (void);
 		}
 
 		public virtual bool IsQuery()
@@ -32,14 +32,14 @@ namespace DynamicServices
 			return !IsCommand();
 		}
 
-		public virtual object Invoke(IDynamicActionInvoker invoker, object instance, IDictionary<string, object> parameters)
+		public virtual object Invoke(IDynamicActionInvoker invoker, IDictionary<string, object> parameters)
 		{
-			return invoker.Invoke(_Method, instance, parameters);
+			return invoker.Invoke(this, parameters);
 		}
 
 		public virtual IList<DynamicParameter> GetParameters()
 		{
-			var parameters = from p in _Method.GetParameters()
+			var parameters = from p in Method.GetParameters()
 			                 select new DynamicParameter
 			                        {
 			                        	Name = p.Name,

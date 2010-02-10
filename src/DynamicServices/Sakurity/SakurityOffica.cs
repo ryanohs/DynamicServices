@@ -2,16 +2,15 @@ namespace DynamicServices.Sakurity
 {
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Reflection;
 
 	public class SakurityOffica : ISakurityOffica
 	{
 		private readonly IList<ISecurityCheck> _Checks = new List<ISecurityCheck>();
 
-		public void SakuritySakurity(MethodInfo method)
+		public void SakuritySakurity(DynamicAction action)
 		{
 			var result =
-				_Checks.OrderBy(c => c.GetLevel()).Select(c => c.Check(method)).Where(r => r != SakurityResult.NotApplicable)
+				_Checks.OrderBy(c => c.GetLevel()).Select(c => c.Check(action)).Where(r => r != SakurityResult.NotApplicable)
 					.FirstOrDefault();
 			if (result == SakurityResult.Allow)
 			{

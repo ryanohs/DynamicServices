@@ -1,32 +1,22 @@
 namespace DynamicServices.Mvc
 {
-	using System;
 	using System.Collections.Generic;
 	using System.Web.Mvc;
 	using ActionDescriptors;
-	using Microsoft.Practices.ServiceLocation;
 
 	public class ReflectedQuery : DynamicActionDescriptor
 	{
-		private readonly IServiceLocator _Locator;
 		private readonly IDynamicActionInvoker _Invoker;
 		private DynamicAction _QueryAction;
 
-		public ReflectedQuery(IServiceLocator locator, IDynamicActionInvoker invoker)
+		public ReflectedQuery(IDynamicActionInvoker invoker)
 		{
-			_Locator = locator;
 			_Invoker = invoker;
 		}
 
 		public override object Execute(ControllerContext controllerContext, IDictionary<string, object> parameters)
 		{
-			var serviceType = _QueryAction.Type;
-			var service = _Locator.GetInstance(serviceType);
-			if (service == null)
-			{
-				throw new Exception("Type not found.");
-			}
-			var data = _QueryAction.Invoke(_Invoker, service, parameters);
+			var data = _QueryAction.Invoke(_Invoker, parameters);
 			return new QueryResult(data);
 		}
 

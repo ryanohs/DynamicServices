@@ -11,11 +11,8 @@ namespace Mvc.Application
 			DefaultLevel = 1;
 
 			For<IDynamicRepository<Product>>()
-				.Allow("All")
-				.Everyone();
-
-			For<IDynamicRepository<Product>>()
-				.Allow("Get")
+				.Allow()
+				.OnAll()
 				.Everyone();
 
 			For<Product>()
