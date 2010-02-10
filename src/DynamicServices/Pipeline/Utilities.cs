@@ -18,6 +18,14 @@ namespace DynamicServices.Pipeline
 			return method.Invoke(null, new[] { enumerable });
 		}
 
+		public static object ToPagedList(object enumerable)
+		{
+			AssertIsNotNull(enumerable);
+			AssertIsEnumerable(enumerable);
+			var innerType = enumerable.GetType().GetGenericArguments()[0];
+			return ToPagedList(innerType, enumerable);
+		}
+
 		public static object ToPagedList(Type innerType, object enumerable)
 		{
 			AssertIsNotNull(enumerable);

@@ -4,6 +4,7 @@ namespace Mvc.Application
 	using Castle.Windsor;
 	using DynamicServices;
 	using DynamicServices.Mvc;
+	using DynamicServices.Pagination;
 	using DynamicServices.Sakurity;
 
 	public static class DynamicRegistry
@@ -30,6 +31,9 @@ namespace Mvc.Application
 				);
 			container.Register(
 				Component.For<DomainActionInvoker>().LifeStyle.Transient
+				);
+			container.Register(
+				Component.For<PaginationStage>().LifeStyle.Transient
 				);
 		}
 	}

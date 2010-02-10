@@ -76,6 +76,7 @@
     <Compile Include="EntityAction.cs" />
     <Compile Include="EntityType.cs" />
     <Compile Include="IDynamicActionInvoker.cs" />
+    <Compile Include="Pagination\PaginationStage.cs" />
     <Compile Include="Sakurity\DomainActionInvoker.cs" />
     <Compile Include="Sakurity\ISakurityOffica.cs" />
     <Compile Include="Sakurity\SecurityCheckBase.cs" />
