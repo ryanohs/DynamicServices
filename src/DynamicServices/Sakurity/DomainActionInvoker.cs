@@ -29,6 +29,21 @@ namespace DynamicServices.Sakurity
 			return action.Method.Invoke(instance, parameters.Select(p => p.Value).ToArray());
 		}
 
+		public IList<DynamicParameter> GetStageParameters(DynamicAction action)
+		{
+			var parameters = (from p in action.Method.GetParameters()
+			                  select new DynamicParameter
+			                         {
+			                         	Name = p.Name,
+			                         	Type = p.ParameterType
+			                         }).ToList();
+			if (action is EntityAction)
+			{
+				parameters.Add(new DynamicParameter {Name = "id", Type = typeof (object)});
+			}
+			return parameters;
+		}
+
 		private object GetEntity(EntityAction action, IDictionary<string, object> parameters)
 		{
 			var repositoryType = typeof (IDynamicRepository<>).MakeGenericType(action.Type);

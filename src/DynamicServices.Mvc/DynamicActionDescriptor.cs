@@ -43,15 +43,15 @@ namespace DynamicServices.Mvc
 			_ActionName = actionName.ToLowerInvariant();
 		}
 
-		public virtual void AddParameter(string parameterName, Type parameterType)
+		public virtual void AddParameter(DynamicParameter parameter)
 		{
-			_Parameters.Add(new DynamicParameterDescriptor(this, parameterName, parameterType));
+			_Parameters.Add(new DynamicParameterDescriptor(this, parameter.Name, parameter.Type));
 		}
 
-		public virtual void AddParameters(DynamicAction action)
+		public virtual void AddParameters(IDynamicActionInvoker invoker, DynamicAction action)
 		{
-			action.GetParameters().ToList()
-				.ForEach(p => AddParameter(p.Name, p.Type));
+			invoker.GetStageParameters(action).ToList()
+				.ForEach(AddParameter);
 		}
 	}
 }

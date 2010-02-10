@@ -5,5 +5,6 @@ namespace DynamicServices
 	public interface IDynamicActionInvoker
 	{
 		object Invoke(DynamicAction action, IDictionary<string, object> parameters);
+		IList<DynamicParameter> GetStageParameters(DynamicAction action);
 	}
 }

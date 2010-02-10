@@ -24,7 +24,7 @@ namespace DynamicServices.Mvc
 		{
 			_QueryAction = queryAction;
 			_Parameters.Clear();
-			AddParameters(queryAction);
+			AddParameters(_Invoker, queryAction);
 		}
 	}
 }

@@ -7,6 +7,8 @@ using PagedList;
 
 namespace DynamicServices.Pipeline
 {
+	using Pagination;
+
 	public class QueryModelInspector
 	{
 		public IFilterLocator FilterLocator { get; set; }
@@ -44,7 +46,8 @@ namespace DynamicServices.Pipeline
 			
 			if (baseType == typeof(IPagedList<>))
 			{
-				result = Utilities.ToPagedList(innerType, data);
+				// ToDo Um how do we page a filled property? probably a bad idea
+				result = Utilities.ToPagedList(innerType, data,new PagingCriteria());
 			}
 			else if (baseType == typeof(IEnumerable<>) || baseType == typeof(IList<>))
 			{

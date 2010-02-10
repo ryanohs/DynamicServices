@@ -2,7 +2,6 @@ namespace DynamicServices
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Linq;
 	using System.Reflection;
 
 	public class DynamicAction
@@ -35,17 +34,6 @@ namespace DynamicServices
 		public virtual object Invoke(IDynamicActionInvoker invoker, IDictionary<string, object> parameters)
 		{
 			return invoker.Invoke(this, parameters);
-		}
-
-		public virtual IList<DynamicParameter> GetParameters()
-		{
-			var parameters = from p in Method.GetParameters()
-			                 select new DynamicParameter
-			                        {
-			                        	Name = p.Name,
-			                        	Type = p.ParameterType
-			                        };
-			return parameters.ToList();
 		}
 	}
 }

@@ -23,7 +23,7 @@ namespace DynamicServices.Mvc
 		{
 			_CommandAction = commandAction;
 			_Parameters.Clear();
-			AddParameters(commandAction);
+			AddParameters(_Invoker, commandAction);
 		}
 	}
 }

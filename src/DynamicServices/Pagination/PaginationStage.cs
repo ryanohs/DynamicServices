@@ -1,13 +1,13 @@
 namespace DynamicServices.Pagination
 {
-	using System;
-	using System.Linq;
 	using System.Collections.Generic;
+	using System.Linq;
 	using Pipeline;
 	using Sakurity;
 
 	public class PaginationStage : IDynamicActionInvoker
 	{
+		public const string PagingCriteriaKey = "PagingCriteria";
 		private readonly IDynamicActionInvoker _Invoker;
 
 		public PaginationStage(DomainActionInvoker invoker)
@@ -17,20 +17,40 @@ namespace DynamicServices.Pagination
 
 		public object Invoke(DynamicAction action, IDictionary<string, object> parameters)
 		{
-			var result = _Invoker.Invoke(action, parameters);
-			var returnType = action.Method.ReturnType;
-			if(!(returnType.IsGenericType && 
-				returnType.GetGenericTypeDefinition() == typeof(IQueryable<>)))
+			var result = _Invoker.Invoke(action,
+			                             parameters.Where(p => p.Key != PagingCriteriaKey).ToDictionary(x => x.Key, x => x.Value));
+			if (!ResultIsPageable(action))
 			{
 				return result;
 			}
-			result = PageResult(result);
+			var pagingCriteria =
+				parameters.Where(p => p.Key == PagingCriteriaKey && p.Value.GetType() == typeof(PagingCriteria)).FirstOrDefault().
+					Value as PagingCriteria;
+			result = PageResult(result, pagingCriteria);
 			return result;
 		}
 
-		private object PageResult(object result)
+		private bool ResultIsPageable(DynamicAction action)
 		{
-			return Utilities.ToPagedList(result);	
+			var returnType = action.Method.ReturnType;
+
+			return (returnType.IsGenericType &&
+			        returnType.GetGenericTypeDefinition() == typeof (IQueryable<>));
+		}
+
+		public IList<DynamicParameter> GetStageParameters(DynamicAction action)
+		{
+			var parameters = _Invoker.GetStageParameters(action);
+			if (ResultIsPageable(action))
+			{
+				parameters.Add(new DynamicParameter {Name = PagingCriteriaKey, Type = typeof (PagingCriteria)});
+			}
+			return parameters;
+		}
+
+		private object PageResult(object result, PagingCriteria criteria)
+		{
+			return Utilities.ToPagedList(result, criteria);
 		}
 	}
 }

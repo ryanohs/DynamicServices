@@ -1,5 +1,6 @@
 namespace DynamicServices.Sakurity
 {
+	using System;
 	using System.Collections.Generic;
 	using Pagination;
 
@@ -19,6 +20,11 @@ namespace DynamicServices.Sakurity
 		{
 			_Offica.SakuritySakurity(action);
 			return _Invoker.Invoke(action, parameters);
+		}
+
+		public IList<DynamicParameter> GetStageParameters(DynamicAction action)
+		{
+			return _Invoker.GetStageParameters(action);
 		}
 	}
 }
