@@ -1,15 +1,14 @@
 namespace DynamicServices.Sakurity
 {
-	using System;
 	using System.Collections.Generic;
 	using Pagination;
 
-	public class SakurityDynamicActionInvoker : IDynamicStage
+	public class SakurityStage : IDynamicStage
 	{
 		private readonly IDynamicStage _Invoker;
 		private readonly ISakurityOffica _Offica;
 
-		public SakurityDynamicActionInvoker(ISakurityOffica offica, PaginationStage invoker)
+		public SakurityStage(ISakurityOffica offica, PaginationStage invoker)
 		{
 			// Todo need to put pipeline together and just have a next continuation like fubumvc.
 			_Offica = offica;

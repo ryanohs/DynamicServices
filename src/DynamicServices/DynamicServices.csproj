@@ -80,6 +80,7 @@
     <Compile Include="Pagination\PagingCriteria.cs" />
     <Compile Include="Sakurity\DomainInvoker.cs" />
     <Compile Include="Sakurity\ISakurityOffica.cs" />
+    <Compile Include="Sakurity\SakurityStage.cs" />
     <Compile Include="Sakurity\SecurityCheckBase.cs" />
     <Compile Include="Sakurity\ThisDudeNeedTaGo.cs" />
     <Compile Include="Sakurity\SakurityOffica.cs" />
@@ -88,7 +89,6 @@
     <Compile Include="Sakurity\SakurityRegistry.cs" />
     <Compile Include="Sakurity\SakurityResult.cs" />
     <Compile Include="Sakurity\TypeAccessExpression.cs" />
-    <Compile Include="Sakurity\SakurityDynamicActionInvoker.cs" />
     <Compile Include="ServicesRegistry.cs" />
     <Compile Include="Filters\IFilter.cs" />
     <Compile Include="Filters\QueryBuilder.cs" />

@@ -27,7 +27,7 @@ namespace Mvc.Application
 				Component.For<ISakurityOffica>().ImplementedBy<SakurityOffica>().LifeStyle.Singleton
 				);
 			container.Register(
-				Component.For<IDynamicStage>().ImplementedBy<SakurityDynamicActionInvoker>().LifeStyle.Transient
+				Component.For<IDynamicStage>().ImplementedBy<SakurityStage>().LifeStyle.Transient
 				);
 			container.Register(
 				Component.For<DomainInvoker>().LifeStyle.Transient
