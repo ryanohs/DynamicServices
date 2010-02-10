@@ -10,7 +10,7 @@ namespace DynamicServices.Pagination
 		public const string PagingCriteriaKey = "PagingCriteria";
 		private readonly IDynamicStage _Invoker;
 
-		public PaginationStage(DomainActionInvoker invoker)
+		public PaginationStage(DomainInvoker invoker)
 		{
 			_Invoker = invoker;
 		}

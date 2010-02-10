@@ -30,7 +30,7 @@ namespace Mvc.Application
 				Component.For<IDynamicStage>().ImplementedBy<SakurityDynamicActionInvoker>().LifeStyle.Transient
 				);
 			container.Register(
-				Component.For<DomainActionInvoker>().LifeStyle.Transient
+				Component.For<DomainInvoker>().LifeStyle.Transient
 				);
 			container.Register(
 				Component.For<PaginationStage>().LifeStyle.Transient
