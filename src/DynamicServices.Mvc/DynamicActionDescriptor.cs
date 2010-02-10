@@ -48,7 +48,7 @@ namespace DynamicServices.Mvc
 			_Parameters.Add(new DynamicParameterDescriptor(this, parameter.Name, parameter.Type));
 		}
 
-		public virtual void AddParameters(IDynamicActionInvoker invoker, DynamicAction action)
+		public virtual void AddParameters(IDynamicStage invoker, DynamicAction action)
 		{
 			invoker.GetStageParameters(action).ToList()
 				.ForEach(AddParameter);

@@ -6,10 +6,10 @@ namespace DynamicServices.Mvc
 
 	public class ReflectedQuery : DynamicActionDescriptor
 	{
-		private readonly IDynamicActionInvoker _Invoker;
+		private readonly IDynamicStage _Invoker;
 		private DynamicAction _QueryAction;
 
-		public ReflectedQuery(IDynamicActionInvoker invoker)
+		public ReflectedQuery(IDynamicStage invoker)
 		{
 			_Invoker = invoker;
 		}

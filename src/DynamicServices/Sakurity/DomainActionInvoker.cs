@@ -4,7 +4,7 @@ namespace DynamicServices.Sakurity
 	using System.Linq;
 	using Microsoft.Practices.ServiceLocation;
 
-	public class DomainActionInvoker : IDynamicActionInvoker
+	public class DomainActionInvoker : IDynamicStage
 	{
 		private readonly IServiceLocator _Locator;
 

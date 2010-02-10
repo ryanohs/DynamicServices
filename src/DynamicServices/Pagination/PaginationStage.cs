@@ -5,10 +5,10 @@ namespace DynamicServices.Pagination
 	using Pipeline;
 	using Sakurity;
 
-	public class PaginationStage : IDynamicActionInvoker
+	public class PaginationStage : IDynamicStage
 	{
 		public const string PagingCriteriaKey = "PagingCriteria";
-		private readonly IDynamicActionInvoker _Invoker;
+		private readonly IDynamicStage _Invoker;
 
 		public PaginationStage(DomainActionInvoker invoker)
 		{

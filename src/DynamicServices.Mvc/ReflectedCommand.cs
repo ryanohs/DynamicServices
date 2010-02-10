@@ -5,10 +5,10 @@ namespace DynamicServices.Mvc
 
 	public class ReflectedCommand : DynamicActionDescriptor
 	{
-		private readonly IDynamicActionInvoker _Invoker;
+		private readonly IDynamicStage _Invoker;
 		private DynamicAction _CommandAction;
 
-		public ReflectedCommand(IDynamicActionInvoker invoker)
+		public ReflectedCommand(IDynamicStage invoker)
 		{
 			_Invoker = invoker;
 		}

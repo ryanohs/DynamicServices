@@ -31,7 +31,7 @@ namespace DynamicServices
 			return !IsCommand();
 		}
 
-		public virtual object Invoke(IDynamicActionInvoker invoker, IDictionary<string, object> parameters)
+		public virtual object Invoke(IDynamicStage invoker, IDictionary<string, object> parameters)
 		{
 			return invoker.Invoke(this, parameters);
 		}

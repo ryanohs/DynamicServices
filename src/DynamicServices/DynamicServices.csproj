@@ -75,7 +75,7 @@
     <Compile Include="DynamicType.cs" />
     <Compile Include="EntityAction.cs" />
     <Compile Include="EntityType.cs" />
-    <Compile Include="IDynamicActionInvoker.cs" />
+    <Compile Include="IDynamicStage.cs" />
     <Compile Include="Pagination\PaginationStage.cs" />
     <Compile Include="Pagination\PagingCriteria.cs" />
     <Compile Include="Sakurity\DomainActionInvoker.cs" />

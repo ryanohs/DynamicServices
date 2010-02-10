@@ -4,9 +4,9 @@ namespace DynamicServices.Sakurity
 	using System.Collections.Generic;
 	using Pagination;
 
-	public class SakurityDynamicActionInvoker : IDynamicActionInvoker
+	public class SakurityDynamicActionInvoker : IDynamicStage
 	{
-		private readonly IDynamicActionInvoker _Invoker;
+		private readonly IDynamicStage _Invoker;
 		private readonly ISakurityOffica _Offica;
 
 		public SakurityDynamicActionInvoker(ISakurityOffica offica, PaginationStage invoker)
