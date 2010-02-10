@@ -50,7 +50,7 @@ namespace DynamicServices.Mvc
 
 		public virtual void AddParameters(IDynamicStage invoker, DynamicAction action)
 		{
-			invoker.GetStageParameters(action).ToList()
+			invoker.GetParameters(action).ToList()
 				.ForEach(AddParameter);
 		}
 	}

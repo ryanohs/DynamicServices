@@ -22,9 +22,9 @@ namespace DynamicServices.Sakurity
 			return _Invoker.Invoke(action, parameters);
 		}
 
-		public IList<DynamicParameter> GetStageParameters(DynamicAction action)
+		public IList<DynamicParameter> GetParameters(DynamicAction action)
 		{
-			return _Invoker.GetStageParameters(action);
+			return _Invoker.GetParameters(action);
 		}
 	}
 }

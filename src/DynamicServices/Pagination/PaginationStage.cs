@@ -38,9 +38,9 @@ namespace DynamicServices.Pagination
 			        returnType.GetGenericTypeDefinition() == typeof (IQueryable<>));
 		}
 
-		public IList<DynamicParameter> GetStageParameters(DynamicAction action)
+		public IList<DynamicParameter> GetParameters(DynamicAction action)
 		{
-			var parameters = _Invoker.GetStageParameters(action);
+			var parameters = _Invoker.GetParameters(action);
 			if (ResultIsPageable(action))
 			{
 				parameters.Add(new DynamicParameter {Name = PagingCriteriaKey, Type = typeof (PagingCriteria)});

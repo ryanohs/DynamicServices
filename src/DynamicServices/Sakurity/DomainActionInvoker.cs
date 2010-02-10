@@ -29,7 +29,7 @@ namespace DynamicServices.Sakurity
 			return action.Method.Invoke(instance, parameters.Select(p => p.Value).ToArray());
 		}
 
-		public IList<DynamicParameter> GetStageParameters(DynamicAction action)
+		public IList<DynamicParameter> GetParameters(DynamicAction action)
 		{
 			var parameters = (from p in action.Method.GetParameters()
 			                  select new DynamicParameter
