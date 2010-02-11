@@ -18,6 +18,11 @@ namespace Mvc.Application
 			For<Product>()
 				.Allow("ToString")
 				.Everyone();
+
+			For<LocationQueries>()
+				.Allow()
+				.OnAllQueries()
+				.Everyone();
 		}
 	}
 }

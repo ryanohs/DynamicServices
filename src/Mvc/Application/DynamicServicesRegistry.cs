@@ -14,6 +14,7 @@ namespace Mvc.Application
 		{
 			Service("products").For<IDynamicRepository<Product>>();
 			Service("product").Entity<Product>();
+			Service("locations").For<LocationQueries>();
 		}
 
 		public static void RegisterConventions()
