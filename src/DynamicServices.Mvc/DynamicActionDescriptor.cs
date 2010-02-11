@@ -1,21 +1,19 @@
 namespace DynamicServices.Mvc
 {
-	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Reflection;
 	using System.Web.Mvc;
 	using ActionDescriptors;
 
 	public abstract class DynamicActionDescriptor : ActionDescriptor
 	{
 		private string _ActionName;
-		protected IList<ParameterDescriptor> _Parameters;
+		protected IList<ParameterDescriptor> Parameters;
 		protected ControllerDescriptor ControllerDescriptorInternal;
 
 		public DynamicActionDescriptor()
 		{
-			_Parameters = new List<ParameterDescriptor>();
+			Parameters = new List<ParameterDescriptor>();
 		}
 
 		public override ControllerDescriptor ControllerDescriptor
@@ -28,9 +26,16 @@ namespace DynamicServices.Mvc
 			get { return _ActionName; }
 		}
 
+		public override FilterInfo GetFilters()
+		{
+			var filters = base.GetFilters();
+			filters.ActionFilters.Add(new JqGridInterceptorFilter());
+			return filters;
+		}
+
 		public override ParameterDescriptor[] GetParameters()
 		{
-			return _Parameters.ToArray();
+			return Parameters.ToArray();
 		}
 
 		public virtual void SetControllerDescriptor(ControllerDescriptor controllerDescriptor)
@@ -45,7 +50,7 @@ namespace DynamicServices.Mvc
 
 		public virtual void AddParameter(DynamicParameter parameter)
 		{
-			_Parameters.Add(new DynamicParameterDescriptor(this, parameter.Name, parameter.Type));
+			Parameters.Add(new DynamicParameterDescriptor(this, parameter.Name, parameter.Type));
 		}
 
 		public virtual void AddParameters(IDynamicStage invoker, DynamicAction action)

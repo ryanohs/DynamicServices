@@ -36,7 +36,7 @@ namespace DynamicServices.Mvc
 			var commandDescriptor = _Locator.GetInstance<ReflectedCommand>();
 			commandDescriptor.SetActionName(actionName);
 			commandDescriptor.SetControllerDescriptor(controllerDescriptor);
-			commandDescriptor.SetCommandMethod(commandAction);
+			commandDescriptor.SetAction(commandAction);
 			return commandDescriptor;
 		}
 	}

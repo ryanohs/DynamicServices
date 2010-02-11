@@ -8,6 +8,7 @@ namespace DynamicServices.Pagination
 			PageSize = 1;
 			//Todo we need contract requirements in here so page size and page are valid always
 		}
+
 		public int PageIndex
 		{
 			get { return Page - 1; }
@@ -15,5 +16,14 @@ namespace DynamicServices.Pagination
 
 		public int Page { get; set; }
 		public int PageSize { get; set; }
+
+		/// <summary>
+		/// This is the value jqgrid uses.
+		/// </summary>
+		public int Rows
+		{
+			get { return PageSize; }
+			set { PageSize = value; }
+		}
 	}
 }

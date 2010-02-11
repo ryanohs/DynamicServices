@@ -10,7 +10,13 @@ namespace Mvc.Application
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 			routes.MapRoute(
-				"Default", // Route name
+				"Extension", // Route name
+				"{controller}/{action}.{ext}/{id}", // URL with parameters
+				new { controller = "Products", action = "All", ext = "json", id = "" } // Parameter defaults
+				);
+
+			routes.MapRoute(
+				"ExtensionLess", // Route name
 				"{controller}/{action}/{id}", // URL with parameters
 				new {controller = "Products", action = "All", id = ""} // Parameter defaults
 				);

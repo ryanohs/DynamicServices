@@ -1,29 +1,16 @@
 namespace DynamicServices.Mvc
 {
-	using System.Collections.Generic;
 	using System.Web.Mvc;
 
-	public class ReflectedCommand : DynamicActionDescriptor
+	public class ReflectedCommand : ReflectedDynamicActionDescriptor
 	{
-		private readonly IDynamicStage _Invoker;
-		private DynamicAction _CommandAction;
-
-		public ReflectedCommand(IDynamicStage invoker)
+		public ReflectedCommand(IDynamicStage stage) : base(stage)
 		{
-			_Invoker = invoker;
 		}
 
-		public override object Execute(ControllerContext controllerContext, IDictionary<string, object> parameters)
+		protected override object GetResult(object data)
 		{
-			_CommandAction.Invoke(_Invoker, parameters);
 			return new EmptyResult();
-		}
-
-		public void SetCommandMethod(DynamicAction commandAction)
-		{
-			_CommandAction = commandAction;
-			_Parameters.Clear();
-			AddParameters(_Invoker, commandAction);
 		}
 	}
 }

@@ -4,6 +4,23 @@ namespace DynamicServices.Sorting
 	{
 		// Todo we need to find what we really want this to look like and have our model binders populate it?
 
-		public string Sort { get; set; }
+
+		private string _Sort;
+
+		public string Sort
+		{
+			get { return _Sort ?? Sidx + " " + Sord; }
+			set
+			{
+				_Sort = value;
+			}
+		}
+
+		/// <summary>
+		/// Temp hack for jqgrid prototype
+		/// </summary>
+		public string Sidx { get; set; }
+
+		public string Sord { get; set; }
 	}
 }

@@ -1,9 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Mvc.Models
 {
 	using System;
+	using System.Collections.Generic;
+	using System.Linq;
 	using DynamicServices;
 
 	public class ProductsRepository : IDynamicRepository<Product>
@@ -12,8 +11,9 @@ namespace Mvc.Models
 
 		public ProductsRepository()
 		{
-			_objects = new List<Product>(Enumerable.Range(0, 10).Select(i => new Product() {Id = i}));
-		}	
+			_objects =
+				new List<Product>(Enumerable.Range(0, 10).Select(i => new Product {Id = i, Price = 10-i, Name = "Product " + i}));
+		}
 
 		public Product Get(object id)
 		{
@@ -32,7 +32,7 @@ namespace Mvc.Models
 
 		public void Remove(Product entity)
 		{
-			if(_objects.Contains(entity)) _objects.Remove(entity);
+			if (_objects.Contains(entity)) _objects.Remove(entity);
 		}
 	}
 }

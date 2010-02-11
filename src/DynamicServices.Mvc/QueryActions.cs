@@ -36,7 +36,7 @@ namespace DynamicServices.Mvc
 			var queryDescriptor = _Locator.GetInstance<ReflectedQuery>();
 			queryDescriptor.SetActionName(actionName);
 			queryDescriptor.SetControllerDescriptor(controllerDescriptor);
-			queryDescriptor.SetQueryMethod(queryAction);
+			queryDescriptor.SetAction(queryAction);
 			return queryDescriptor;
 		}
 	}
