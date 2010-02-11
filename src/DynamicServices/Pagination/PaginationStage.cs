@@ -3,45 +3,37 @@ namespace DynamicServices.Pagination
 	using System.Collections.Generic;
 	using System.Linq;
 	using Pipeline;
-	using Sakurity;
+	using Sorting;
 
-	public class PaginationStage : IDynamicStage
+	public class PaginationStage : QueryableStage
 	{
 		public const string PagingCriteriaKey = "PagingCriteria";
 		private readonly IDynamicStage _Invoker;
 
-		public PaginationStage(DomainInvoker invoker)
+		public PaginationStage(SortingStage invoker)
 		{
 			_Invoker = invoker;
 		}
 
-		public object Invoke(DynamicAction action, IDictionary<string, object> parameters)
+		public override object Invoke(DynamicAction action, IDictionary<string, object> parameters)
 		{
 			var result = _Invoker.Invoke(action,
 			                             parameters.Where(p => p.Key != PagingCriteriaKey).ToDictionary(x => x.Key, x => x.Value));
-			if (!ResultIsPageable(action))
+			if (!ResultIsQueryable(action))
 			{
 				return result;
 			}
 			var pagingCriteria =
-				parameters.Where(p => p.Key == PagingCriteriaKey && p.Value.GetType() == typeof(PagingCriteria)).FirstOrDefault().
+				parameters.Where(p => p.Key == PagingCriteriaKey && p.Value.GetType() == typeof (PagingCriteria)).FirstOrDefault().
 					Value as PagingCriteria;
 			result = PageResult(result, pagingCriteria);
 			return result;
 		}
 
-		private bool ResultIsPageable(DynamicAction action)
-		{
-			var returnType = action.Method.ReturnType;
-
-			return (returnType.IsGenericType &&
-			        returnType.GetGenericTypeDefinition() == typeof (IQueryable<>));
-		}
-
-		public IList<DynamicParameter> GetParameters(DynamicAction action)
+		public override IList<DynamicParameter> GetParameters(DynamicAction action)
 		{
 			var parameters = _Invoker.GetParameters(action);
-			if (ResultIsPageable(action))
+			if (ResultIsQueryable(action))
 			{
 				parameters.Add(new DynamicParameter {Name = PagingCriteriaKey, Type = typeof (PagingCriteria)});
 			}

@@ -70,6 +70,7 @@
     <Compile Include="Configuration\IDataProvider.cs" />
     <Compile Include="Conventions\IConvention.cs" />
     <Compile Include="DynamicAction.cs" />
+    <Compile Include="DynamicLibrary.cs" />
     <Compile Include="DynamicParameter.cs" />
     <Compile Include="DynamicService.cs" />
     <Compile Include="DynamicType.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="IDynamicStage.cs" />
     <Compile Include="Pagination\PaginationStage.cs" />
     <Compile Include="Pagination\PagingCriteria.cs" />
+    <Compile Include="Pagination\QueryableStage.cs" />
     <Compile Include="Sakurity\DomainInvoker.cs" />
     <Compile Include="Sakurity\ISakurityOffica.cs" />
     <Compile Include="Sakurity\SakurityStage.cs" />
@@ -100,6 +102,8 @@
     <Compile Include="Pipeline\QueryModelInspector.cs" />
     <Compile Include="Conventions\FilterNameStartsWithPropertyName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sorting\SortingCriteria.cs" />
+    <Compile Include="Sorting\SortingStage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

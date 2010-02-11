@@ -6,6 +6,7 @@ namespace Mvc.Application
 	using DynamicServices.Mvc;
 	using DynamicServices.Pagination;
 	using DynamicServices.Sakurity;
+	using DynamicServices.Sorting;
 
 	public static class DynamicRegistry
 	{
@@ -31,6 +32,9 @@ namespace Mvc.Application
 				);
 			container.Register(
 				Component.For<DomainInvoker>().LifeStyle.Transient
+				);
+			container.Register(
+				Component.For<SortingStage>().LifeStyle.Transient
 				);
 			container.Register(
 				Component.For<PaginationStage>().LifeStyle.Transient
