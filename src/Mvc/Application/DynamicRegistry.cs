@@ -3,6 +3,7 @@ namespace Mvc.Application
 	using Castle.MicroKernel.Registration;
 	using Castle.Windsor;
 	using DynamicServices;
+	using DynamicServices.Filters;
 	using DynamicServices.Mvc;
 	using DynamicServices.Pagination;
 	using DynamicServices.Sakurity;
@@ -35,6 +36,9 @@ namespace Mvc.Application
 				);
 			container.Register(
 				Component.For<SortingStage>().LifeStyle.Transient
+				);
+			container.Register(
+				Component.For<FilteringStage>().LifeStyle.Transient
 				);
 			container.Register(
 				Component.For<PaginationStage>().LifeStyle.Transient
