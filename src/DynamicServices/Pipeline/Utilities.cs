@@ -47,17 +47,10 @@ namespace DynamicServices.Pipeline
 
 		public static void AssertIsEnumerable(object argument)
 		{
-			var type = argument.GetType();
-			if (type.IsGenericType)
+			if(!IsEnumerable(argument))
 			{
-				var outerType = type.GetGenericTypeDefinition();
-				if (typeof (IEnumerable<>).IsAssignableFrom(outerType) || typeof (IEnumerable).IsAssignableFrom(outerType))
-					// Second case handles "System.Linq.EnumerableQuery" type
-				{
-					return;
-				}
+				throw new ArgumentException("Argument is not enumerable.");
 			}
-			throw new ArgumentException("Argument is not enumerable.");
 		}
 
 		public static void AssertPropertyExists(Type type, string propertyName)
@@ -67,6 +60,20 @@ namespace DynamicServices.Pipeline
 				throw new ArgumentException(string.Format("Type {0} does not have a property named '{1}'", type.FullName,
 				                                          propertyName));
 			}
+		}
+
+		public static bool IsEnumerable(object argument)
+		{
+			var type = argument.GetType();
+			if (type.IsGenericType)
+			{
+				var outerType = type.GetGenericTypeDefinition();
+				if (typeof(IEnumerable<>).IsAssignableFrom(outerType))
+				{
+					return true;
+				}
+			}
+			return typeof(IEnumerable).IsAssignableFrom(type);	// Handles "System.Linq.EnumerableQuery" type
 		}
 	}
 }

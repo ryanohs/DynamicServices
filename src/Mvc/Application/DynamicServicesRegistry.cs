@@ -21,6 +21,7 @@ namespace Mvc.Application
 		{
 			DynamicControllerRegistrar.AddCommonActionFor<Query>("alls");
 			DynamicControllerRegistrar.AddCommonActionFor<ViewWithoutModel>("index");
+			DynamicControllerRegistrar.AddCommonActionFor<DynamicInsert>("add");
 		}
 
 		public static void Bootstrap(IWindsorContainer container)

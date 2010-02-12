@@ -47,6 +47,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\CommonServiceLocator\CommonServiceLocator.WindsorAdapter.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlTags, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\HtmlTags\HtmlTags.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlTags.Adapter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\HtmlTags\HtmlTags.Adapter.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -91,6 +99,8 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\HtmlConventionRegistry.cs" />
+    <Compile Include="Application\DefaultHtmlConventions.cs" />
     <Compile Include="Application\Sakurity.cs" />
     <Compile Include="Application\WindsorContainerSetup.cs" />
     <Compile Include="Application\WebRegistry.cs" />
@@ -198,6 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\Products\Index.spark" />
+    <None Include="Views\Shared\EditorView.spark" />
     <None Include="Views\Shared\QueryView.spark" />
   </ItemGroup>
   <ItemGroup>
