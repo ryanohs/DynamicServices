@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using DynamicServices.Pagination;
 using DynamicServices.Pipeline;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Tests.DynamicServices
 		{
 			var enumerable = new List<Customer>().AsEnumerable();
 
-			var list = Utilities.ToPagedList(typeof(Customer), enumerable);
+			var list = Utilities.ToPagedList(typeof(Customer), new PagingCriteria());
 
 			Expect(list.GetType(), Is.EqualTo(typeof(PagedList<Customer>)));
 		}
@@ -49,6 +50,26 @@ namespace Tests.DynamicServices
 			TestDelegate act = () => Utilities.AssertIsEnumerable(notEnumerable);
 
 			Expect(act, Throws.TypeOf<ArgumentException>());
+		}
+
+		[Test]
+		public void IsEnumerable_SourceIsEnumerable_ReturnsTrue()
+		{
+			var enumerable = new List<Customer>().AsEnumerable();
+
+			var isEnumerable = Utilities.IsEnumerable(enumerable);
+
+			Expect(isEnumerable, Is.True);
+		}
+
+		[Test]
+		public void IsEnumerable_SourceIsNotEnumerable_ReturnsFalse()
+		{
+			var enumerable = new Customer();
+
+			var isEnumerable = Utilities.IsEnumerable(enumerable);
+
+			Expect(isEnumerable, Is.False);
 		}
 
 		[Test]

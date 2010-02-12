@@ -1,3 +1,5 @@
+using DynamicServices.Pipeline;
+
 namespace DynamicServices.Mvc.ActionDescriptors
 {
 	using System.Collections;
@@ -15,14 +17,23 @@ namespace DynamicServices.Mvc.ActionDescriptors
 		public override void ExecuteResult(ControllerContext context)
 		{
 			//Todo: we need a pipeline for handling the output based on the extension of the request, maybe that can happen in result filters like with FubuMvc
+			object json;
 
-			var json = new
-			           {
-			           	rows = Data as IEnumerable,
-			           	page = Data.GetType().GetProperty("PageNumber").GetValue(Data, null),
-			           	records = Data.GetType().GetProperty("TotalItemCount").GetValue(Data, null),
-			           	total = Data.GetType().GetProperty("PageCount").GetValue(Data, null)
-			           };
+			if(Utilities.IsEnumerable(Data))
+			{
+				json = new
+				{
+					rows = Data as IEnumerable,
+					page = Data.GetType().GetProperty("PageNumber").GetValue(Data, null),
+					records = Data.GetType().GetProperty("TotalItemCount").GetValue(Data, null),
+					total = Data.GetType().GetProperty("PageCount").GetValue(Data, null)
+				};
+
+			}
+			else
+			{
+				json = Data;
+			}
 
 			new JsonResult {Data = json}.ExecuteResult(context);
 		}

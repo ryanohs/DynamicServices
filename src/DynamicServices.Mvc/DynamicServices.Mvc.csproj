@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlTags, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\HtmlTags\HtmlTags.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -82,6 +86,8 @@
     <Compile Include="DynamicActionDescriptor.cs" />
     <Compile Include="DynamicActionInvoker.cs" />
     <Compile Include="DynamicControllerFactory.cs" />
+    <Compile Include="DynamicEditor.cs" />
+    <Compile Include="DynamicInsert.cs" />
     <Compile Include="DynamicQuery.cs" />
     <Compile Include="DynamicControllerRegistrar.cs" />
     <Compile Include="IDynamicQuery.cs" />
