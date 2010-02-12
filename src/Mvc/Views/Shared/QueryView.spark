@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
 <%=Html.Stylesheet("ui.jqgrid.css")%>
 <%=Html.Stylesheet("black-tie/jquery-ui.css")%>
@@ -8,9 +8,30 @@
 <%=Html.ScriptInclude("i18n/grid.locale-en.js")%>
 <%=Html.ScriptInclude("jquery.jqGrid.min.js")%>
 <%=Html.ScriptInclude("Common.js")%>
+	<!-- Superfish -->
+	<%=Html.Stylesheet("~/Content/menu/superfish.css")%>
+	<%=Html.ScriptInclude("~/Content/menu/hoverIntent.js")%>
+	<%=Html.ScriptInclude("~/Content/menu/superfish.js")%>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("ul.sf-menu").superfish();
+		}); 
+	</script>
+
+<style type="text/css"> 
+* { margin:0;
+    padding:0;
+}
+html { background:#333333; color:white; }
+div#menucontainer {height:50px}
+</style> 
 </head>
 <body>
-	Welcome to our dynamic query view.
+	<div id="menucontainer">
+		!{ViewData["MenuKey"]}
+	</div>
+	<br/>
 	!{ViewData["jqGrid"]}
 </body>
 </html>

@@ -5,6 +5,7 @@ namespace Mvc.Application
 	using DynamicServices;
 	using DynamicServices.Filters;
 	using DynamicServices.Mvc;
+	using DynamicServices.Mvc.Menus;
 	using DynamicServices.Pagination;
 	using DynamicServices.Sakurity;
 	using DynamicServices.Sorting;
@@ -42,6 +43,9 @@ namespace Mvc.Application
 				);
 			container.Register(
 				Component.For<PaginationStage>().LifeStyle.Transient
+				);
+			container.Register(
+				Component.For<InjectMenuResultFilter>().LifeStyle.Transient
 				);
 		}
 	}

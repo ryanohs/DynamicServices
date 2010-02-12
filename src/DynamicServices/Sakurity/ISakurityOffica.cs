@@ -6,5 +6,6 @@ namespace DynamicServices.Sakurity
 		void SakuritySakurity(DynamicAction action);
 		// Todo add parameter for user context so we can check roles and user id and what not
 		void AddCheck(ISecurityCheck check);
+		bool IzOk(DynamicAction action);
 	}
 }

@@ -35,4 +35,19 @@ namespace Mvc.Models
 			if (_objects.Contains(entity)) _objects.Remove(entity);
 		}
 	}
+
+	public class ProductQueries
+	{
+		private readonly IDynamicRepository<Product> _Products;
+
+		public ProductQueries(IDynamicRepository<Product> products)
+		{
+			_Products = products;
+		}
+
+		public IQueryable<Product> AllSecret()
+		{
+			return _Products.All();
+		}		
+	}
 }

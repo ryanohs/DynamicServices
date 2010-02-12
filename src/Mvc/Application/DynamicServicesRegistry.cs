@@ -12,9 +12,9 @@ namespace Mvc.Application
 	{
 		public DynamicServicesRegistry()
 		{
-			Service("products").For<IDynamicRepository<Product>>();
-			Service("product").Entity<Product>();
-			Service("locations").For<LocationQueries>();
+			Service("Products").For<IDynamicRepository<Product>>().For<ProductQueries>();
+			Service("Product").Entity<Product>();
+			Service("Locations").For<LocationQueries>();
 		}
 
 		public static void RegisterConventions()

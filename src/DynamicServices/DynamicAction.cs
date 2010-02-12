@@ -2,6 +2,7 @@ namespace DynamicServices
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 	using System.Reflection;
 
 	public class DynamicAction
@@ -29,6 +30,11 @@ namespace DynamicServices
 		public virtual bool IsQuery()
 		{
 			return !IsCommand();
+		}
+
+		public virtual bool IsCollectionQuery()
+		{
+			return IsQuery() && Method.ReturnType.GetInterfaces().Any(i => i == typeof (IQueryable));
 		}
 
 		public virtual object Invoke(IDynamicStage invoker, IDictionary<string, object> parameters)

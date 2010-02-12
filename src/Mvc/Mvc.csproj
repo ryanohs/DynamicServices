@@ -139,6 +139,13 @@
     <Content Include="Content\css\black-tie\ui.tabs.css" />
     <Content Include="Content\css\black-tie\ui.theme.css" />
     <Content Include="Content\css\ui.jqgrid.css" />
+    <Content Include="Content\menu\arrows-ffffff.png" />
+    <Content Include="Content\menu\hoverIntent.js" />
+    <Content Include="Content\menu\jquery.bgiframe.min.js" />
+    <Content Include="Content\menu\shadow.png" />
+    <Content Include="Content\menu\superfish.css" />
+    <Content Include="Content\menu\superfish.js" />
+    <Content Include="Content\menu\supersubs.js" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Common.js" />
@@ -217,12 +224,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49216</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost/ds</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

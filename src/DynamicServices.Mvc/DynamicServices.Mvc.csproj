@@ -35,6 +35,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="MvcContrib, Version=1.0.0.916, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\MvcContrib\MvcContrib.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.1.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\PagedList.dll</HintPath>
@@ -83,6 +87,7 @@
     <Compile Include="IDynamicQuery.cs" />
     <Compile Include="IFindAction.cs" />
     <Compile Include="JqGridInterceptorFilter.cs" />
+    <Compile Include="Menus\InjectMenuResultFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryActions.cs" />
     <Compile Include="QueryParameters.cs" />

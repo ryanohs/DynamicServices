@@ -4,9 +4,12 @@ namespace DynamicServices.Mvc
 	using System.Linq;
 	using System.Web.Mvc;
 	using ActionDescriptors;
+	using Menus;
+	using Microsoft.Practices.ServiceLocation;
 
 	public abstract class DynamicActionDescriptor : ActionDescriptor
 	{
+		public IServiceLocator Locator { get; set; }
 		private string _ActionName;
 		protected IList<ParameterDescriptor> Parameters;
 		protected ControllerDescriptor ControllerDescriptorInternal;
@@ -30,6 +33,7 @@ namespace DynamicServices.Mvc
 		{
 			var filters = base.GetFilters();
 			filters.ActionFilters.Add(new JqGridInterceptorFilter());
+			filters.ResultFilters.Add(Locator.GetInstance<InjectMenuResultFilter>());
 			return filters;
 		}
 

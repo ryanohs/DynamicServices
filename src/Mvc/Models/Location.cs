@@ -1,8 +1,6 @@
 namespace Mvc.Models
 {
-	using System.Collections.Generic;
 	using System.Linq;
-	using DynamicServices;
 
 	public class Location
 	{
@@ -17,6 +15,14 @@ namespace Mvc.Models
 		{
 			return Enumerable.Range(0, 100)
 				.Select(i => new Location {Id = i, Employees = i%10, Name = "Location " + i})
+				.ToList()
+				.AsQueryable();
+		}
+
+		public IQueryable<Location> Others()
+		{
+			return Enumerable.Range(0, 100)
+				.Select(i => new Location {Id = i, Employees = i%20, Name = "Loc " + i})
 				.ToList()
 				.AsQueryable();
 		}

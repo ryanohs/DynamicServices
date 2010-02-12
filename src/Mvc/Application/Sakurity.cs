@@ -15,6 +15,11 @@ namespace Mvc.Application
 				.OnAll()
 				.Everyone();
 
+			For<ProductQueries>()
+				.Allow()
+				.OnAll()
+				.Everyone();
+
 			For<Product>()
 				.Allow("ToString")
 				.Everyone();
